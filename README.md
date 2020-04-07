@@ -7,7 +7,7 @@ Motion and Trajectory Planning for PETCat, the long term project.
 
 ### 2. Clone the project to your own machine
 
-``` git clone https://github.com/${your_username_here}/PETcat_localization ```
+``` git clone https://github.com/${your_username_here}/PETcat_motion ```
 
 ### 3. Commit changes to your own branch: 
 
