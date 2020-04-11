@@ -5,7 +5,7 @@ classdef Leg
     properties
         startPoint;
         l1;
-        joint;
+        joint;%it will be found using findJoint function
         l2;
         endPoint;
     end
