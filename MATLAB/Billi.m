@@ -43,8 +43,8 @@
 			obj.frontLeft.startPoint= obj.body.orient*[l/2;b/2;0;1];
 			obj.backRight.startPoint= obj.body.orient*[-l/2;-b/2;0;1];
 			obj.backLeft.startPoint= obj.body.orient*[-l/2;b/2;0;1];                       
-        end        
-        function [obj] = update(obj,fr,fl,br,bl,com,angle)%object,frontRight,frontLeft,backRight,backLeft,centre of mass,heading angle
+    end        
+    function [obj] = update(obj,fr,fl,br,bl,com,angle)%object,frontRight,frontLeft,backRight,backLeft,centre of mass,heading angle
         obj.body.orient =T(com)*rZ(angle);  
         
         l=obj.body.length;
@@ -62,6 +62,6 @@
         [~, obj.backRight.joint, ~]= findleg(obj.backRight.startPoint(1:3,1),obj.backRight.endPoint,obj.backRight.l1,obj.backRight.l2,pi/2);
         [~, obj.backLeft.joint, ~]= findleg(obj.backLeft.startPoint(1:3,1),obj.backLeft.endPoint,obj.backLeft.l1,obj.backLeft.l2,-pi/2);
             
-        end
+    end
 	end
 end
