@@ -8,10 +8,12 @@
 		backRight;
 		backLeft;
 		body;
+        com;
 	end
 	methods
 		function obj= Billi(body_obj,l1,l2)%body frame and length of links
 			obj.body=body_obj;
+            obj.com = obj.body.orient(1:3, 4);
 			height=obj.body.orient(3,4);%z-coordinate of body
 			l=obj.body.length;
 			b=obj.body.breadth;
@@ -29,13 +31,13 @@
 			obj.frontLeft.startPoint= obj.body.orient*[l/2;b/2;0;1];
 			obj.backRight.startPoint= obj.body.orient*[-l/2;-b/2;0;1];
 			obj.backLeft.startPoint= obj.body.orient*[-l/2;b/2;0;1];
-										
+            obj.com = obj.body.orient(1:3, 4);
 		end
 		function [obj] = rotate(obj,angle)%rotate billi by given angle(in radians) about z-axis
 			obj.body.orient =obj.body.orient*    [cos(angle) -sin(angle) 0 0;
-							      sin(angle) cos(angle)  0 0;
-							      0          0           1 0;
-							      0          0           0 1];
+                                                  sin(angle) cos(angle)  0 0;
+                                                  0          0           1 0;
+                                                  0          0           0 1];
 						
 			l=obj.body.length;
 			b=obj.body.breadth;
@@ -43,8 +45,9 @@
 			obj.frontLeft.startPoint= obj.body.orient*[l/2;b/2;0;1];
 			obj.backRight.startPoint= obj.body.orient*[-l/2;-b/2;0;1];
 			obj.backLeft.startPoint= obj.body.orient*[-l/2;b/2;0;1];                       
-    		end        
-    		function [obj] = update(obj,fr,fl,br,bl,com,angle)%object,frontRight,frontLeft,backRight,backLeft,centre of mass,heading angle
+            obj.com = obj.body.orient(1:3, 4);
+    	end        
+    	function [obj] = update(obj,fr,fl,br,bl,com,angle)%object,frontRight,frontLeft,backRight,backLeft,centre of mass,heading angle
 			obj.body.orient =T(com)*rZ(angle);  
 
 			l=obj.body.length;
@@ -59,9 +62,10 @@
 			obj.backLeft.endPoint= bl;
 			[~, obj.frontRight.joint, ~]=findleg(obj.frontRight.startPoint(1:3,1),obj.frontRight.endPoint,obj.frontRight.l1,obj.frontRight.l2,pi/2);
 			[~, obj.frontLeft.joint, ~]= findleg(obj.frontLeft.startPoint(1:3,1),obj.frontLeft.endPoint,obj.frontLeft.l1,obj.frontLeft.l2,-pi/2);
-			[~, obj.backRight.joint, ~]= findleg(obj.backRight.startPoint(1:3,1),obj.backRight.endPoint,obj.backRight.l1,obj.backRight.l2,pi/2);
-			[~, obj.backLeft.joint, ~]= findleg(obj.backLeft.startPoint(1:3,1),obj.backLeft.endPoint,obj.backLeft.l1,obj.backLeft.l2,-pi/2);
+			[~, obj.backRight.joint, ~]= findleg(obj.backRight.startPoint(1:3,1),obj.backRight.endPoint,obj.backRight.l1,obj.backRight.l2,-pi/2);
+			[~, obj.backLeft.joint, ~]= findleg(obj.backLeft.startPoint(1:3,1),obj.backLeft.endPoint,obj.backLeft.l1,obj.backLeft.l2,pi/2);
+            obj.com = obj.body.orient(1:3, 4);
             
-    		end
+    	end
 	end
 end

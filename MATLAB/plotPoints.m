@@ -11,9 +11,5 @@ function [x, y, z] = plotPoints(A)
         z = [z; A(3,i)];
     end
     plot3(x, y, z, 'k-o')
-    grid on 
-    axis([-10 10 -10 10 0 10])
-    pbaspect([2 2 1])
-    view([10 10 10])
 end
 
