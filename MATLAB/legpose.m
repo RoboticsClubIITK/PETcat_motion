@@ -11,26 +11,16 @@ body_obj = Body(10 , 8 , orientation_matrix);
 myObj= Billi(body_obj,length1,length2);
 myObj= myObj.update([5; 5; 0],[5; -5; 0],[-5; 5; 0],[-5; -5; 0],[0; 0; 6],0);
 
-for i = linspace(0, 2*pi, 30)
-    myObj= myObj.update([5*1.414*cos(-pi/4 + i); 5*1.414*sin(-pi/4 + i); 0],[5*1.414*cos(pi/4 + i); 5*1.414*sin(pi/4 + i); 0],[-5*1.414*cos(pi/4 + i); -5*1.414*sin(pi/4 + i); 0],[-5*1.414*cos(-pi/4 + i); -5*1.414*sin(-pi/4 + i); 0],[0; 0; 6],i);
+for i = linspace(0, 2*pi, 1)
+    com = [i; 0; 6];
+    myObj= myObj.update([5*1.414*cos(-pi/4 + i); 5*1.414*sin(-pi/4 + i); -5] + com,...     % location of fr.endPoint
+                        [5*1.414*cos(pi/4 + i); 5*1.414*sin(pi/4 + i); -6] + com,...       % location of fl.endPoint
+                        [-5*1.414*cos(pi/4 + i); -5*1.414*sin(pi/4 + i); -6] + com,...     % location of br.endPoint
+                        [-5*1.414*cos(-pi/4 + i); -5*1.414*sin(-pi/4 + i); -6] + com,...   % location of bl.endPoint
+                        com,...                                               % location of CoM
+                        i);                                                         % heading angle of quadruped
 
-    b =     [myObj.frontLeft.startPoint, myObj.backLeft.startPoint, myObj.backRight.startPoint, myObj.frontRight.startPoint, myObj.frontLeft.startPoint, (myObj.frontRight.startPoint + myObj.frontLeft.startPoint)/2];
-
-    fr =    [myObj.frontRight.startPoint(1:3), myObj.frontRight.joint, myObj.frontRight.endPoint(1:3)];
-
-    fl =    [myObj.frontLeft.startPoint(1:3), myObj.frontLeft.joint, myObj.frontLeft.endPoint(1:3)];
-
-    br =    [myObj.backRight.startPoint(1:3), myObj.backRight.joint, myObj.backRight.endPoint(1:3)];
-
-    bl =    [myObj.backLeft.startPoint(1:3), myObj.backLeft.joint, myObj.backLeft.endPoint(1:3)];
-         
-    hold off;
-    plotPoints(fr);
-    hold on;
-    plotPoints(fl);
-    plotPoints(br);
-    plotPoints(bl);
-    plotPoints(b);
-    
+    plotBody(myObj, com);
+    poly = plotFootPolygon(myObj, true);        % PLots the foot polygon (polygon connecting feet on ground)
     pause(0.01)
 end
