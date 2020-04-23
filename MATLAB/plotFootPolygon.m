@@ -9,6 +9,7 @@ for i = 1:size(feet,2)
     end
 end
 if plot_poly
+    figure(1);
     plot_t = [foot_poly, foot_poly(:,1)];
     hold on
     plot3(plot_t(1,:), plot_t(2,:), plot_t(3,:), 'r-.')

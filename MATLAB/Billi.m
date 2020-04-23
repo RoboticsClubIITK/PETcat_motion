@@ -60,10 +60,10 @@
 			obj.frontLeft.endPoint= fl;
 			obj.backRight.endPoint= br;
 			obj.backLeft.endPoint= bl;
-			[~, obj.frontRight.joint, ~]=findleg(obj.frontRight.startPoint(1:3,1),obj.frontRight.endPoint,obj.frontRight.l1,obj.frontRight.l2,pi/2);
-			[~, obj.frontLeft.joint, ~]= findleg(obj.frontLeft.startPoint(1:3,1),obj.frontLeft.endPoint,obj.frontLeft.l1,obj.frontLeft.l2,-pi/2);
-			[~, obj.backRight.joint, ~]= findleg(obj.backRight.startPoint(1:3,1),obj.backRight.endPoint,obj.backRight.l1,obj.backRight.l2,-pi/2);
-			[~, obj.backLeft.joint, ~]= findleg(obj.backLeft.startPoint(1:3,1),obj.backLeft.endPoint,obj.backLeft.l1,obj.backLeft.l2,pi/2);
+			[~, obj.frontRight.joint, ~]=findleg(obj.frontRight.startPoint(1:3,1),obj.frontRight.endPoint,obj.frontRight.l1,obj.frontRight.l2,0);
+			[~, obj.frontLeft.joint, ~]= findleg(obj.frontLeft.startPoint(1:3,1),obj.frontLeft.endPoint,obj.frontLeft.l1,obj.frontLeft.l2,0);
+			[~, obj.backRight.joint, ~]= findleg(obj.backRight.startPoint(1:3,1),obj.backRight.endPoint,obj.backRight.l1,obj.backRight.l2,-pi);
+			[~, obj.backLeft.joint, ~]= findleg(obj.backLeft.startPoint(1:3,1),obj.backLeft.endPoint,obj.backLeft.l1,obj.backLeft.l2,-pi);
             obj.com = obj.body.orient(1:3, 4);
             
     	end
